@@ -1,0 +1,10 @@
+name = "lean2cpp"
+version = "0.1.0"
+defaultTargets = ["lean2cpp"]
+
+[[lean_lib]]
+name = "Lean2Cpp"
+
+[[lean_exe]]
+name = "lean2cpp"
+root = "lean.Main"
