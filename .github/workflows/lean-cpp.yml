@@ -1,0 +1,40 @@
+name: lean-cpp-verification
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  context:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check context IDs
+        run: python3 tools/check_context_ids.py
+      - name: Check manifests
+        run: python3 tools/check_manifest.py
+
+  lean:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Lean
+        run: |
+          curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -sSf | sh -s -- -y
+      - name: Build Lean project
+        run: |
+          source "$HOME/.elan/env"
+          lake build
+
+  cpp:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build representative test
+        run: |
+          g++ -std=c++20 -Wall -Wextra -Werror \
+            -Icpp/diophantine \
+            tests/diophantine/pythagorean_test.cpp \
+            -o pythagorean_test
+      - name: Run representative test
+        run: ./pythagorean_test
