@@ -1,0 +1,24 @@
+{
+  "context_id": "NT-PYTH-001",
+  "status": "example",
+  "description": "Diophantine Pythagorean witness and Euclidean construction",
+  "lean": {
+    "module": "Diophantine",
+    "definition": "Pythagorean",
+    "theorem": "pythagorean_from_legs",
+    "construction_theorem": "pythagorean_triple_is_valid",
+    "build_status": "pending"
+  },
+  "cpp": {
+    "header": "cpp/diophantine/pythagorean.hpp",
+    "concept": "PythagoreanWitness",
+    "test": "tests/diophantine/pythagorean_test.cpp",
+    "build_status": "pending"
+  },
+  "ffi": {
+    "status": "not-yet-connected"
+  },
+  "provenance": {
+    "commit": "filled-by-ci"
+  }
+}

@@ -1,24 +1,12 @@
-namespace Lean2Cpp
+import Mathlib
 
-/-- The Pythagorean relation over natural numbers. -/
-def Pythagorean (a b c : Nat) : Prop :=
-  a * a + b * b = c * c
+namespace Diophantine
 
-/-- The canonical 3-4-5 Pythagorean triple. -/
-theorem three_four_five : Pythagorean 3 4 5 := by
-  norm_num [Pythagorean]
+/-- A concrete Pythagorean triple. -/
+def isPythagorean (x y z : Nat) : Bool :=
+  x ^ 2 + y ^ 2 == z ^ 2
 
-/-- Symmetry of the two legs. -/
-theorem pythagorean_commutative (a b c : Nat) :
-    Pythagorean a b c → Pythagorean b a c := by
-  intro h
-  simpa [Pythagorean, Nat.add_comm] using h
+example : isPythagorean 3 4 5 = true := by decide
+example : isPythagorean 5 12 13 = true := by decide
 
-/-- A direct specification theorem: a supplied equality is the relation. -/
-theorem relation_holds_of_equality
-    (a b c : Nat)
-    (h : a * a + b * b = c * c) :
-    Pythagorean a b c := by
-  exact h
-
-end Lean2Cpp
+end Diophantine

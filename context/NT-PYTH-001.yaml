@@ -1,0 +1,30 @@
+id: NT-PYTH-001
+name: Diophantine Pythagorean witness
+domain: number-theory
+phase: formalization
+
+mathematical:
+  relation: x^2 + y^2 = z^2
+  domain: Nat
+  interpretation: Two legs determine a verified hypotenuse when the square witness exists.
+
+lean:
+  module: Diophantine
+  definition: Diophantine.Pythagorean
+  theorem: Diophantine.pythagorean_from_legs
+  construction: Diophantine.pythagorean_triple_is_valid
+
+cpp:
+  header: cpp/diophantine/pythagorean.hpp
+  concept: diophantine.PythagoreanWitness
+  functions:
+    - diophantine::is_pythagorean
+    - diophantine::euclidean_triple
+    - diophantine::valid_euclidean_triple
+
+gates:
+  - context-id-check
+  - lean-theorem-check
+  - cpp-concept-check
+  - cpp-build-check
+  - representative-test
